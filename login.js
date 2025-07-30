@@ -1,5 +1,5 @@
 // URL API yang sama dengan sebelumnya
-const API_URL = "https://script.google.com/macros/s/AKfycbz4U29eOsKIPA9eiZ7IgBik8fBYzT1rSzNjMnah5aP17fdiudP0y9i9fuX3TxdJ9U0/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwv22sfbsxaQakCptT23RfsiXLy61XkON6209_mLdu8w2VsNmkhjPLv4DQxCTrYS9E/exec";
 
 const form = document.getElementById('loginForm');
 const messageDiv = document.getElementById('message');
