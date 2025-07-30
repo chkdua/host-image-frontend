@@ -1,6 +1,5 @@
-// URL API kita yang sakti
-const API_URL = "https://script.google.com/macros/s/AKfycbwv22sfbsxaQakCptT23RfsiXLy61XkON6209_mLdu8w2VsNmkhjPLv4DQxCTrYS9E/exec";
-
+// URL API
+const API_URL = `https://script.google.com/macros/s/API_ID/exec`;
 // Ambil elemen dari halaman
 const imageContainer = document.getElementById('imageContainer');
 const loadingMessage = document.getElementById('loadingMessage');
