@@ -1,5 +1,5 @@
 // URL API
-const API_URL = `https://script.google.com/macros/s/API_ID/exec`;
+const API_URL = `https://script.google.com/macros/s/${API_ID}/exec`;
 const form = document.getElementById('loginForm');
 const messageDiv = document.getElementById('message');
 const submitButton = document.getElementById('submitButton');
