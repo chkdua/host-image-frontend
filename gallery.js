@@ -43,7 +43,7 @@ function fetchImages(userId) {
                     
                     item.innerHTML = `
                         <a href="${image.url}" target="_blank">
-                            <img src="${image.url}" alt="${image.name}" loading="lazy">
+                            <img src="${image.thumbnailUrl}" alt="${image.name}" loading="lazy">
                         </a>
                         <p title="${image.name}">${image.name}</p>
                     `;
