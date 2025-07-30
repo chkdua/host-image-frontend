@@ -1,5 +1,5 @@
 // URL API kita yang sakti
-const API_URL = "https://script.google.com/macros/s/AKfycbwIqTpOSat_n5319PBBBHYjhxpOXFOm2x3-vxWglMuz52pJG9eUVYRFn2ESZqvmI6A/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbz4U29eOsKIPA9eiZ7IgBik8fBYzT1rSzNjMnah5aP17fdiudP0y9i9fuX3TxdJ9U0/exec";
 
 // Ambil elemen dari halaman
 const imageContainer = document.getElementById('imageContainer');
