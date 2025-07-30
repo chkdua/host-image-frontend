@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Gambar</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .upload-container { max-width: 600px; }
+        #image-preview { max-width: 100%; max-height: 200px; margin-top: 1rem; display: none; }
+        .result-area { margin-top: 1.5rem; display: none; }
+        .result-area input { width: calc(100% - 80px); }
+        .result-area button { width: 70px; }
+    </style>
+</head>
+<body>
+    <div class="container upload-container">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Upload Gambar Anda</h1>
+            <button id="logoutButton" style="width: auto; background-color: #dc3545;">Logout</button>
+        </div>
+        
+        <form id="uploadForm">
+            <div class="form-group">
+                <label for="imageInput">Pilih file gambar:</label>
+                <input type="file" id="imageInput" accept="image/*" required>
+            </div>
+            <img id="imagePreview" src="#" alt="Pratinjau Gambar"/>
+            <button type="submit" id="submitButton">Upload</button>
+        </form>
+        
+        <div id="message"></div>
+
+        <div class="result-area" id="resultArea">
+            <p><strong>Sukses! Ini link gambar Anda:</strong></p>
+            <input type="text" id="imageUrl" readonly>
+            <button id="copyButton">Salin</button>
+        </div>
+    </div>
+
+    <script src="upload.js"></script>
+</body>
+</html>
