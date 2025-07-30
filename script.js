@@ -1,5 +1,5 @@
 // Ganti URL ini dengan URL Google Apps Script Anda
-const API_URL = "https://script.google.com/macros/s/AKfycbwIqTpOSat_n5319PBBBHYjhxpOXFOm2x3-vxWglMuz52pJG9eUVYRFn2ESZqvmI6A/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzqBPHYarGqskIRoizGrCRP8f0P-xZ0fWHsRnUnsNlVfPKkXXVYPCfw_KS_gThw9Bo/exec";
 
 const form = document.getElementById('registerForm');
 const messageDiv = document.getElementById('message');
