@@ -1,5 +1,5 @@
 // URL API
-const API_URL = 'https://script.google.com/macros/s/AKfycbx_SV7E056UbYIAt5OlGK8wFyUdyCzt5i06Jl2qmdfLqZLFcNevZVfEf8NSt_eOaf2i/exec';
+const API_URL = `https://script.google.com/macros/s/${API_ID}/exec`;
 // Ambil elemen dari halaman
 const imageContainer = document.getElementById('imageContainer');
 const loadingMessage = document.getElementById('loadingMessage');
