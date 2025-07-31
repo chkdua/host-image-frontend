@@ -14,6 +14,14 @@ body {
 	width: 100%;
 	max-width: 400px;
 }
+.container-gallery {
+	background: white;
+	padding: 2rem 2.5rem;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	margin: 0px 20px;
+}
 h1 {
 	text-align: center;
 	color: #333;
@@ -201,7 +209,7 @@ button:disabled {
     background-color: #dc3545; /* Merah */
 }
 @media only screen and (max-width: 500px) {
-	body {
+	body, .container-gallery {
 		margin: 0;
 	}
 	.container {
