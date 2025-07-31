@@ -39,8 +39,8 @@ function fetchImages(userId) {
                 data.images.forEach(image => {
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
-                    
 					item.innerHTML = `
+						<div class="loading-overlay"><div class="spinner"></div></div>
 						<a href="${image.url}" target="_blank" title="Lihat gambar penuh">
 							<img src="${image.thumbnailUrl}" alt="${image.name}" loading="lazy">
 						</a>
@@ -63,24 +63,46 @@ function fetchImages(userId) {
     });
 }
 
+/// === GANTI SEMUA KODE DI BAWAH INI ===
+
+/**
+ * Menampilkan notifikasi toast di pojok layar.
+ * @param {string} message - Pesan yang akan ditampilkan.
+ * @param {string} type - 'success' atau 'error' untuk warna.
+ */
+function showToast(message, type = 'success') {
+    const toast = document.getElementById('toastNotification');
+    toast.textContent = message;
+    toast.className = 'show ' + type; // Menambahkan class .show dan tipe (success/error)
+
+    // Sembunyikan toast setelah 3 detik
+    setTimeout(function(){ 
+        toast.className = toast.className.replace('show', ''); 
+    }, 3000);
+}
+
 // Menggunakan Event Delegation untuk menangani semua klik di dalam container
 imageContainer.addEventListener('click', function(e) {
-    // Cek apakah yang diklik adalah tombol dengan class 'delete-button'
     if (e.target.classList.contains('delete-button')) {
         const button = e.target;
-        const fileId = button.dataset.fileid; // Ambil fileId dari atribut data-*
+        const fileId = button.dataset.fileid;
         
-        // Minta konfirmasi dari pengguna
         if (confirm('Anda yakin ingin menghapus gambar ini secara permanen?')) {
             handleDelete(fileId, button);
         }
     }
 });
 
-// Fungsi untuk mengirim permintaan hapus ke backend
+/**
+ * Fungsi untuk mengirim permintaan hapus ke backend dan menangani UI.
+ * @param {string} fileId - ID file yang akan dihapus.
+ * @param {HTMLElement} buttonElement - Elemen tombol yang diklik.
+ */
 function handleDelete(fileId, buttonElement) {
-    buttonElement.disabled = true;
-    buttonElement.textContent = '...'; // Tanda loading
+    const cardElement = buttonElement.closest('.gallery-item');
+    
+    // 1. Tampilkan status loading
+    cardElement.classList.add('deleting');
 
     const userId = localStorage.getItem('userId');
     const requestBody = {
@@ -98,22 +120,23 @@ function handleDelete(fileId, buttonElement) {
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            // Jika sukses, hapus elemen gambar dari halaman
-            buttonElement.closest('.gallery-item').remove();
+            // 2a. Jika sukses, hapus kartu dan tampilkan notifikasi sukses
+            cardElement.remove();
+            showToast('Gambar berhasil dihapus!', 'success');
         } else {
-            alert('Error: ' + data.message);
-            buttonElement.disabled = false;
-            buttonElement.textContent = '×'; // Kembalikan ke 'X'
+            // 2b. Jika gagal, hapus loading dan tampilkan notifikasi error
+            cardElement.classList.remove('deleting');
+            showToast('Error: ' + data.message, 'error');
         }
     })
     .catch(error => {
-        alert('Gagal terhubung ke server.');
-        buttonElement.disabled = false;
-        buttonElement.textContent = '×';
+        // 2c. Jika ada masalah jaringan, hapus loading dan tampilkan notifikasi error
+        cardElement.classList.remove('deleting');
+        showToast('Gagal terhubung ke server.', 'error');
     });
 }
 
-// 3. Fungsi logout (sama seperti sebelumnya)
+// Fungsi logout
 logoutButton.addEventListener('click', function() {
     localStorage.removeItem('userId');
     alert('Anda telah logout.');
