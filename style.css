@@ -191,8 +191,8 @@ button:disabled {
     padding: 16px;
     position: fixed;
     z-index: 20;
-    right: 30px;
-    bottom: 30px;
+    left: 30px;
+    top: 30px;
     opacity: 0;
     transition: visibility 0.5s, opacity 0.5s, transform 0.5s;
     transform: translateY(20px);
