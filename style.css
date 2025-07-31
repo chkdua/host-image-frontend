@@ -3,10 +3,9 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 20px;
+	margin: 20px 0px;
 	background-color: #f0f2f5;
 }
-
 .container {
 	background: white;
 	padding: 2rem 2.5rem;
@@ -15,24 +14,20 @@ body {
 	width: 100%;
 	max-width: 400px;
 }
-
 h1 {
 	text-align: center;
 	color: #333;
 	margin-bottom: 1.5rem;
 }
-
 .form-group {
 	margin-bottom: 1.25rem;
 }
-
 label {
 	display: block;
 	margin-bottom: 0.5rem;
 	font-weight: 600;
 	color: #555;
 }
-
 input[type="email"],
 input[type="password"] {
 	width: 100%;
@@ -42,13 +37,11 @@ input[type="password"] {
 	border-radius: 4px;
 	font-size: 1rem;
 }
-
 input:focus {
 	border-color: #007bff;
 	outline: none;
 	box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
-
 button {
 	width: 100%;
 	padding: 0.75rem;
@@ -61,33 +54,27 @@ button {
 	cursor: pointer;
 	transition: background-color 0.2s;
 }
-
 button:hover {
 	background-color: #0056b3;
 }
-
 button:disabled {
 	background-color: #a0c3e6;
 	cursor: not-allowed;
 }
-
 #message {
 	margin-top: 1rem;
 	text-align: center;
 	font-weight: 500;
 }
-
 .navigation-link {
 	text-align: center;
 	margin-top: 1.5rem;
 	font-size: 0.9rem;
 }
-
 .navigation-link a {
 	color: #007bff;
 	text-decoration: none;
 }
-
 .navigation-link a:hover {
 	text-decoration: underline;
 }
@@ -155,6 +142,63 @@ button:disabled {
     align-items: center;
     opacity: 0;
     transition: opacity 0.2s;
+}
+/* CSS untuk Loading Overlay */
+.gallery-item .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: none; /* Sembunyi secara default */
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+.gallery-item.deleting .loading-overlay {
+    display: flex; /* Tampilkan saat class 'deleting' */
+}
+/* CSS untuk Spinner itu sendiri */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* CSS untuk Notifikasi Toast */
+#toastNotification {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px;
+    position: fixed;
+    z-index: 20;
+    right: 30px;
+    bottom: 30px;
+    opacity: 0;
+    transition: visibility 0.5s, opacity 0.5s, transform 0.5s;
+    transform: translateY(20px);
+}
+#toastNotification.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+#toastNotification.success {
+    background-color: #28a745; /* Hijau */
+}
+#toastNotification.error {
+    background-color: #dc3545; /* Merah */
 }
 @media only screen and (max-width: 500px) {
 	body {
