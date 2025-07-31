@@ -212,7 +212,7 @@ button:disabled {
 	body, .container-gallery {
 		margin: 0;
 	}
-	.container {
+	.container, .container-gallery {
 		padding: 14px;
 	}
 }
