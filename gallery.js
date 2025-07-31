@@ -40,12 +40,13 @@ function fetchImages(userId) {
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
                     
-                    item.innerHTML = `
-                        <a href="${image.url}" target="_blank">
-                            <img src="${image.thumbnailUrl}" alt="${image.name}" loading="lazy">
-                        </a>
-                        <p title="${image.name}">${image.name}</p>
-                    `;
+					item.innerHTML = `
+						<a href="${image.url}" target="_blank" title="Lihat gambar penuh">
+							<img src="${image.thumbnailUrl}" alt="${image.name}" loading="lazy">
+						</a>
+						<p title="${image.name}">${image.name}</p>
+						<button class="delete-button" data-fileid="${image.fileId}" title="Hapus Gambar">×</button>
+					`;
                     imageContainer.appendChild(item);
                 });
             } else {
@@ -59,6 +60,56 @@ function fetchImages(userId) {
     .catch(error => {
         loadingMessage.style.display = 'none';
         imageContainer.innerHTML = `<p style="color: red;">Gagal terhubung ke server.</p>`;
+    });
+}
+
+// Menggunakan Event Delegation untuk menangani semua klik di dalam container
+imageContainer.addEventListener('click', function(e) {
+    // Cek apakah yang diklik adalah tombol dengan class 'delete-button'
+    if (e.target.classList.contains('delete-button')) {
+        const button = e.target;
+        const fileId = button.dataset.fileid; // Ambil fileId dari atribut data-*
+        
+        // Minta konfirmasi dari pengguna
+        if (confirm('Anda yakin ingin menghapus gambar ini secara permanen?')) {
+            handleDelete(fileId, button);
+        }
+    }
+});
+
+// Fungsi untuk mengirim permintaan hapus ke backend
+function handleDelete(fileId, buttonElement) {
+    buttonElement.disabled = true;
+    buttonElement.textContent = '...'; // Tanda loading
+
+    const userId = localStorage.getItem('userId');
+    const requestBody = {
+        action: "deleteImage",
+        fileId: fileId,
+        userId: userId
+    };
+
+    fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        redirect: 'follow'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // Jika sukses, hapus elemen gambar dari halaman
+            buttonElement.closest('.gallery-item').remove();
+        } else {
+            alert('Error: ' + data.message);
+            buttonElement.disabled = false;
+            buttonElement.textContent = '×'; // Kembalikan ke 'X'
+        }
+    })
+    .catch(error => {
+        alert('Gagal terhubung ke server.');
+        buttonElement.disabled = false;
+        buttonElement.textContent = '×';
     });
 }
 
